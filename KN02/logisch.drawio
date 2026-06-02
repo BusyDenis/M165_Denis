@@ -1,0 +1,56 @@
+<mxfile host="Electron">
+  <diagram id="logisch" name="Logisch-MongoDB">
+    <mxGraphModel dx="757" dy="663" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;" value="Logisches Datenmodell für MongoDB – IronTrack" vertex="1">
+          <mxGeometry height="30" width="600" x="40" y="16" as="geometry" />
+        </mxCell>
+        <mxCell id="members" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;" value="&lt;b&gt;members&lt;/b&gt;  (Collection)" vertex="1">
+          <mxGeometry height="480" width="360" x="40" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="members_attrs" parent="members" style="text;html=1;align=left;verticalAlign=top;fontSize=12;spacingLeft=4;" value="_id: ObjectId&lt;br&gt;firstName: string&lt;br&gt;lastName: string&lt;br&gt;birthDate: date&lt;br&gt;heightCm: int&lt;br&gt;startWeightKg: float&lt;br&gt;membershipCode: char&lt;br&gt;trainerId: ObjectId → trainers" vertex="1">
+          <mxGeometry height="150" width="334" x="14" y="34" as="geometry" />
+        </mxCell>
+        <mxCell id="workout" parent="members" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;dashed=0;" value="&lt;b&gt;workouts[]&lt;/b&gt;  (eingebettet · Array)" vertex="1">
+          <mxGeometry height="265" width="320" x="20" y="195" as="geometry" />
+        </mxCell>
+        <mxCell id="workout_attrs" parent="workout" style="text;html=1;align=left;verticalAlign=top;fontSize=12;spacingLeft=4;" value="date: date&lt;br&gt;focus: string&lt;br&gt;durationMin: int" vertex="1">
+          <mxGeometry height="66" width="300" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="satz" parent="workout" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;" value="&lt;b&gt;exercises[]&lt;/b&gt; / Sätze  (eingebettet · Array)" vertex="1">
+          <mxGeometry height="138" width="284" x="18" y="112" as="geometry" />
+        </mxCell>
+        <mxCell id="satz_attrs" parent="satz" style="text;html=1;align=left;verticalAlign=top;fontSize=12;spacingLeft=4;" value="exerciseId: ObjectId → exercises&lt;br&gt;sets: int&lt;br&gt;reps: int&lt;br&gt;weightKg: float" vertex="1">
+          <mxGeometry height="100" width="268" x="8" y="28" as="geometry" />
+        </mxCell>
+        <mxCell id="trainers" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;trainers&lt;/b&gt;  (Collection)&lt;br&gt;&lt;br&gt;_id: ObjectId&lt;br&gt;firstName: string&lt;br&gt;lastName: string&lt;br&gt;specialization: string&lt;br&gt;hireDate: date" vertex="1">
+          <mxGeometry height="150" width="270" x="470" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="exercises" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;exercises&lt;/b&gt;  (Collection)&lt;br&gt;&lt;br&gt;_id: ObjectId&lt;br&gt;name: string&lt;br&gt;muscleGroup: string&lt;br&gt;type: char  (C/I)&lt;br&gt;equipmentId: ObjectId → equipment" vertex="1">
+          <mxGeometry height="160" width="290" x="470" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="equipment" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=left;spacingLeft=8;spacingTop=6;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;" value="&lt;b&gt;equipment&lt;/b&gt;  (Collection)&lt;br&gt;&lt;br&gt;_id: ObjectId&lt;br&gt;name: string&lt;br&gt;category: string&lt;br&gt;quantity: int" vertex="1">
+          <mxGeometry height="130" width="270" x="470" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="ref_trainer" edge="1" parent="1" source="members" style="endArrow=open;html=1;dashed=1;strokeColor=#666666;fontSize=11;fontColor=#666666;exitX=1;exitY=0.15;entryX=0;entryY=0.5;" target="trainers" value="trainerId (Referenz)">
+          <mxGeometry relative="1" x="0.1628" y="-16" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ref_exercise" edge="1" parent="1" source="satz" style="endArrow=open;html=1;dashed=1;strokeColor=#666666;fontSize=11;fontColor=#666666;entryX=0;entryY=0.5;" target="exercises" value="exerciseId (Referenz)">
+          <mxGeometry relative="1" x="0.0071" y="-10" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ref_equipment" edge="1" parent="1" source="exercises" style="endArrow=open;html=1;dashed=1;strokeColor=#666666;fontSize=11;fontColor=#666666;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="equipment" value="equipmentId (Referenz)">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#666666;" value="Verschachtelte Rechtecke = eingebettete Dokumente (Embedding).  Gestrichelte Pfeile = Referenzen über ObjectId.&#xa;Verschachtelung: members ⊃ workouts[] ⊃ exercises[] (2 Ebenen)." vertex="1">
+          <mxGeometry height="40" width="700" x="40" y="620" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

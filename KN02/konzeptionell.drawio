@@ -1,0 +1,74 @@
+<mxfile host="app.diagrams.net" version="24.0.0">
+  <diagram id="konzept" name="Konzeptionell">
+    <mxGraphModel dx="900" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="950" pageHeight="620" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Konzeptionelles Datenmodell – IronTrack (Kraft-/Fitnessstudio)" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="trainer" value="Trainer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="member" value="Member" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="320" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="workout" value="Workout" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="320" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="exercise" value="Exercise" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="320" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="equipment" value="Equipment" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="80" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_tm" value="betreut" style="endArrow=none;html=1;fontSize=12;" edge="1" parent="1" source="trainer" target="member">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tm_s" value="c" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" connectable="0" parent="e_tm">
+          <mxGeometry x="-0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e_tm_t" value="mc" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" connectable="0" parent="e_tm">
+          <mxGeometry x="0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_mw" value="absolviert" style="endArrow=none;html=1;fontSize=12;" edge="1" parent="1" source="member" target="workout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mw_s" value="1" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" connectable="0" parent="e_mw">
+          <mxGeometry x="-0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e_mw_t" value="mc" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" connectable="0" parent="e_mw">
+          <mxGeometry x="0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_we" value="enthält  (N:N)" style="endArrow=none;html=1;fontSize=12;strokeColor=#b85450;strokeWidth=2;fontColor=#b85450;fontStyle=1;" edge="1" parent="1" source="workout" target="exercise">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_we_s" value="mc" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e_we">
+          <mxGeometry x="-0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e_we_t" value="mc" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontColor=#b85450;fontStyle=1;" vertex="1" connectable="0" parent="e_we">
+          <mxGeometry x="0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="e_eq" value="nutzt" style="endArrow=none;html=1;fontSize=12;" edge="1" parent="1" source="exercise" target="equipment">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_eq_s" value="mc" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" connectable="0" parent="e_eq">
+          <mxGeometry x="-0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+        <mxCell id="e_eq_t" value="c" style="edgeLabel;html=1;resizable=0;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" connectable="0" parent="e_eq">
+          <mxGeometry x="0.7" relative="1" as="geometry"><mxPoint as="offset" /></mxGeometry>
+        </mxCell>
+
+        <mxCell id="legend" value="Rote Beziehung = netzwerkförmig (N:N). Kardinalitäten: 1 = genau eins, c = 0..1, m = 1..n, mc = 0..n." style="text;html=1;align=left;verticalAlign=top;fontSize=11;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="100" y="440" width="640" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
