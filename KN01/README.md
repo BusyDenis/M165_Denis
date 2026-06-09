@@ -9,7 +9,7 @@ MongoDB 6.0 auf einer AWS Ubuntu 22.04 EC2-Instanz, provisioniert per Cloud-Init
 |-------|--------|
 | [`cloudinit-mongodb.yaml`](./cloudinit-mongodb.yaml) | Cloud-Init mit geändertem Passwort + eigenem SSH-Key (Teil A) |
 | [`create-users.mongodb.js`](./create-users.mongodb.js) | Skript für die zwei Benutzer (Teil D) |
-| `x_res/` | Screenshots + Export-Datei |
+| `pictures/` | Screenshots + Export-Datei |
 
 | Server | Wert |
 |---|---|
@@ -31,7 +31,7 @@ mongodb://admin:m165-Demo-Pw.2026@32.196.73.49:27017/?authSource=admin&readPrefe
 
 > **Hinweis:** Diese Compass-Version lehnte den String beim Einfügen mit *„option authsource is not supported"* ab. Verbunden habe ich mich mit dem verkürzten `mongodb://admin:m165-Demo-Pw.2026@32.196.73.49:27017/` bzw. über das Formular (Authentication Database = `admin`). Ohne Angabe von `authSource` setzt MongoDB die Auth-DB automatisch auf `admin` — also den korrekten Wert.
 
-![Compass mit der Liste der bestehenden Datenbanken](./x_res/a-compass-dblist.png)
+![Compass mit der Liste der bestehenden Datenbanken](./pictures/a-compass-dblist.png)
 
 **Welche Ports?** MongoDB lauscht auf **TCP 27017** (plus 22 für SSH) — beide in der Security Group geöffnet.
 
@@ -44,7 +44,7 @@ mongodb://admin:m165-Demo-Pw.2026@32.196.73.49:27017/?authSource=admin&readPrefe
 
 Beide ersetzten Werte auf dem Server geprüft mit `grep -E "bindIp|authorization" /etc/mongod.conf`:
 
-![mongod.conf mit bindIp 0.0.0.0 und authorization enabled](./x_res/a-mongod-conf.png)
+![mongod.conf mit bindIp 0.0.0.0 und authorization enabled](./pictures/a-mongod-conf.png)
 
 ---
 
@@ -56,13 +56,13 @@ In Compass die Datenbank **`Suciu`** (Nachname) mit Collection **`Denis`** (Vorn
 { "adresse": "Musterstrasse 1, 8000 Zürich", "groesse": 178, "geburtsdatum": "2000-05-12" }
 ```
 
-![Dokument vor dem Einfügen](./x_res/b-insert-before.png)
+![Dokument vor dem Einfügen](./pictures/b-insert-before.png)
 
 `geburtsdatum` war zunächst ein **String**; im Editiermodus den Datentyp auf **Date** geändert (Typen jetzt: `String`, `Int32`, `Date`):
 
-![Dokument nach Änderung auf Date](./x_res/b-after-date.png)
+![Dokument nach Änderung auf Date](./pictures/b-after-date.png)
 
-Danach als JSON exportiert → [`x_res/b-export.json`](./x_res/b-export.json).
+Danach als JSON exportiert → [`pictures/b-export.json`](./pictures/b-export.json).
 
 **Frage – Datum direkt korrekt einfügen?** Im Export erscheint das Datum als Extended JSON: `"geburtsdatum": { "$date": "2000-05-12T00:00:00.000Z" }`. Man hätte also direkt diese `{ "$date": "..." }`-Notation verwenden müssen. **Warum so kompliziert?** JSON kennt kein Datum (nur string, number, boolean, null, object, array). MongoDB speichert intern **BSON** mit Typen wie `Date`, `ObjectId`, `Int32`; um diese in JSON auszudrücken, gibt es **Extended JSON** mit `$`-Wrappern (`$date`, `$oid`, …). Ein normaler String bliebe ein String — Sortierung/Vergleiche und Datums-Operatoren funktionieren dann nicht.
 
@@ -84,8 +84,8 @@ test
 
 Server-Login: `ssh ubuntu@32.196.73.49`, dann `sudo mongosh --authenticationDatabase "admin" -u "admin" -p "m165-Demo-Pw.2026"`.
 
-![Befehle in der Compass-Shell](./x_res/c-compass-shell.png)
-![Befehle in mongosh auf dem Server](./x_res/c-server-shell.png)
+![Befehle in der Compass-Shell](./pictures/c-compass-shell.png)
+![Befehle in mongosh auf dem Server](./pictures/c-server-shell.png)
 
 **Frage – Befehle 1–5 & Collections vs. Tables:**
 
@@ -111,7 +111,7 @@ mongodb://admin:m165-Demo-Pw.2026@32.196.73.49:27017/?authSource=Suciu
 
 → **`Authentication failed`**, da der `admin`-Benutzer nur in `admin` existiert. Bestätigt Teil A.
 
-![Authentication failed bei falscher authSource](./x_res/d-wrong-authsource.png)
+![Authentication failed bei falscher authSource](./pictures/d-wrong-authsource.png)
 
 **2. Zwei Benutzer erstellt** ([`create-users.mongodb.js`](./create-users.mongodb.js)) — built-in Rollen ohne „Any":
 
@@ -120,15 +120,15 @@ mongodb://admin:m165-Demo-Pw.2026@32.196.73.49:27017/?authSource=Suciu
 
 **3. Benutzer 1 (`leser`)** — getestet in mongosh: `db.auth("leser","Leser-Pw.2026")` → `{ ok: 1 }`, `db.Denis.find()` liefert das Dokument, `db.Denis.insertOne({test:1})` → **`not authorized`**.
 
-![Login Benutzer 1](./x_res/d-user1-login.png)
-![Benutzer 1 – Lesen OK](./x_res/d-user1-read-ok.png)
-![Benutzer 1 – Schreiben verweigert](./x_res/d-user1-write-fail.png)
+![Login Benutzer 1](./pictures/d-user1-login.png)
+![Benutzer 1 – Lesen OK](./pictures/d-user1-read-ok.png)
+![Benutzer 1 – Schreiben verweigert](./pictures/d-user1-write-fail.png)
 
 **4. Benutzer 2 (`schreiber`)** — `use admin; db.auth("schreiber","Schreiber-Pw.2026")` → `{ ok: 1 }`, dann `use Suciu`: `find()` liefert das Dokument, `insertOne({test:2})` → **`acknowledged: true`**.
 
-![Login Benutzer 2](./x_res/d-user2-login.png)
-![Benutzer 2 – Lesen OK](./x_res/d-user2-read-ok.png)
-![Benutzer 2 – Schreiben OK](./x_res/d-user2-write-ok.png)
+![Login Benutzer 2](./pictures/d-user2-login.png)
+![Benutzer 2 – Lesen OK](./pictures/d-user2-read-ok.png)
+![Benutzer 2 – Schreiben OK](./pictures/d-user2-write-ok.png)
 
 Damit gezeigt: `read` erlaubt nur Lesen, `readWrite` auch Schreiben — und die Auth-DB entscheidet, wo der Benutzer gefunden wird.
 

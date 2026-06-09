@@ -25,7 +25,7 @@ Skript [`01-insert.mongodb.js`](./01-insert.mongodb.js) füllt alle vier Collect
 - **`insertMany()`** für `trainers`, `equipment`, `exercises`.
 - **`insertOne()`** (erstes Mitglied) **und `insertMany()`** (übrige Mitglieder) für `members`.
 
-![Teil A – Insert](./x_res/a-insert.png)
+![Teil A – Insert](./pictures/a-insert.png)
 
 ---
 
@@ -37,8 +37,8 @@ Skript [`01-insert.mongodb.js`](./01-insert.mongodb.js) füllt alle vier Collect
 - `deleteOne({ _id: t3 })` — löscht genau einen Trainer über die `_id`.
 - `deleteMany({ $or: [ { _id: ex4 }, { _id: ex5 } ] })` — löscht 2 von 5 Übungen über eine **ODER-Verknüpfung** der `_id` (nicht alle).
 
-![Teil B – alle Collections löschen](./x_res/b1-drop-all.png)
-![Teil B – Datensätze teilweise löschen](./x_res/b2-delete-partial.png)
+![Teil B – alle Collections löschen](./pictures/b1-drop-all.png)
+![Teil B – Datensätze teilweise löschen](./pictures/b2-delete-partial.png)
 
 ---
 
@@ -55,7 +55,7 @@ Skript [`04-queries.mongodb.js`](./04-queries.mongodb.js) — alle Bedingungen e
 
 → mind. eine Abfrage pro Collection, DateTime-Filter, ODER, UND (andere Collection als ODER), Regex, Projektion mit und ohne `_id`.
 
-![Teil C – Abfragen](./x_res/c-queries.png)
+![Teil C – Abfragen](./pictures/c-queries.png)
 
 ---
 
@@ -67,7 +67,7 @@ Skript [`05-update.mongodb.js`](./05-update.mongodb.js) — drei Befehle auf dre
 - **`updateMany`** auf `exercises` **ohne** `_id`, mit `$or` (Legs **oder** Back) — verändert 3 Dokumente.
 - **`replaceOne`** auf `equipment` — ersetzt das „Cable Machine"-Dokument komplett.
 
-![Teil D – Update](./x_res/d-update.png)
+![Teil D – Update](./pictures/d-update.png)
 
 ---
 
@@ -75,7 +75,7 @@ Skript [`05-update.mongodb.js`](./05-update.mongodb.js) — drei Befehle auf dre
 
 | Teil | Abgabe | Ort |
 |------|--------|-----|
-| A | Insert-Skript + Screenshot | `01-insert.mongodb.js` · `x_res/a-insert.png` |
-| B | Drop-all-Skript + Teil-Lösch-Skript + Screenshots | `02-drop-all.mongodb.js` · `03-delete-partial.mongodb.js` · `x_res/b1-drop-all.png` · `x_res/b2-delete-partial.png` |
-| C | Abfrage-Skript + Screenshot | `04-queries.mongodb.js` · `x_res/c-queries.png` |
-| D | Update-Skript + Screenshot | `05-update.mongodb.js` · `x_res/d-update.png` |
+| A | Insert-Skript + Screenshot | `01-insert.mongodb.js` · `pictures/a-insert.png` |
+| B | Drop-all-Skript + Teil-Lösch-Skript + Screenshots | `02-drop-all.mongodb.js` · `03-delete-partial.mongodb.js` · `pictures/b1-drop-all.png` · `pictures/b2-delete-partial.png` |
+| C | Abfrage-Skript + Screenshot | `04-queries.mongodb.js` · `pictures/c-queries.png` |
+| D | Update-Skript + Screenshot | `05-update.mongodb.js` · `pictures/d-update.png` |

@@ -5,15 +5,15 @@
 
 | Datei | Inhalt |
 |-------|--------|
-| [`konzeptionell.drawio`](./konzeptionell.drawio) / `x_res/konzeptionell.png` | Konzeptionelles Modell (A) |
-| [`logisch.drawio`](./logisch.drawio) / `x_res/logisch.png` | Logisches MongoDB-Modell (B) |
-| [`create-collections.mongodb.js`](./create-collections.mongodb.js) / `x_res/c-collections.png` | Collections-Skript + Nachweis (C) |
+| [`konzeptionell.drawio`](./konzeptionell.drawio) / `pictures/konzeptionell.png` | Konzeptionelles Modell (A) |
+| [`logisch.drawio`](./logisch.drawio) / `pictures/logisch.png` | Logisches MongoDB-Modell (B) |
+| [`create-collections.mongodb.js`](./create-collections.mongodb.js) / `pictures/c-collections.png` | Collections-Skript + Nachweis (C) |
 
 ---
 
 ## A) Konzeptionelles Datenmodell (30 %)
 
-![Konzeptionelles Datenmodell](./x_res/konzeptionell.png)
+![Konzeptionelles Datenmodell](./pictures/konzeptionell.png)
 
 | Entität | Beschreibung |
 |---------|--------------|
@@ -38,7 +38,7 @@
 
 ## B) Logisches Modell für MongoDB (60 %)
 
-![Logisches MongoDB-Datenmodell](./x_res/logisch.png)
+![Logisches MongoDB-Datenmodell](./pictures/logisch.png)
 
 **4 Collections:** `members` (bettet `workouts[]` ein, das wiederum `exercises[]`/Sätze einbettet), `trainers`, `exercises`, `equipment`.
 
@@ -69,7 +69,7 @@ db.createCollection("equipment")
 show collections
 ```
 
-![Erstellte Collections](./x_res/c-collections.png)
+![Erstellte Collections](./pictures/c-collections.png)
 
 ---
 
@@ -77,6 +77,6 @@ show collections
 
 | Teil | Abgabe | Ort |
 |------|--------|-----|
-| A | Draw.io-Datei + Bild + Erklärung Entitäten/Beziehungen | `konzeptionell.drawio` · `x_res/konzeptionell.png` · Abschnitt A |
-| B | Draw.io-Datei + Bild + Erklärung Verschachtelung | `logisch.drawio` · `x_res/logisch.png` · Abschnitt B |
-| C | Skript + Screenshot der Collections | `create-collections.mongodb.js` · `x_res/c-collections.png` |
+| A | Draw.io-Datei + Bild + Erklärung Entitäten/Beziehungen | `konzeptionell.drawio` · `pictures/konzeptionell.png` · Abschnitt A |
+| B | Draw.io-Datei + Bild + Erklärung Verschachtelung | `logisch.drawio` · `pictures/logisch.png` · Abschnitt B |
+| C | Skript + Screenshot der Collections | `create-collections.mongodb.js` · `pictures/c-collections.png` |
